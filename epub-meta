@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+#require(File.expand_path('ebooks/epub', File.dirname(__FILE__)))
+require './epub'
+require 'thor'
+require 'zip'
+require 'sqlite3'
+
+class EpubMeta < Thor
+  desc "ls_files", "list files"
+  def ls_files(path)
+    meta = EPub.load(path)
+    puts meta.mime_type, meta.media_type, meta.dc.to_s
+  end  
+end
+
+EpubMeta.start(ARGV)
